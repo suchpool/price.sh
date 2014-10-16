@@ -16,6 +16,11 @@ fi
 
 COINZ=$1
 
+if [ ${COINZ} == "BTC" ]; then
+   BITSTAMPGET=`curl -sG --max-time 15 'https://www.bitstamp.net/api/ticker/'`
+   BITSTAMPPRICE=`echo $BITSTAMPGET | jq .last | cut -d '"' -f2`
+   echo "["`date +%T`"]" "BTC/USD - Last: "$BITSTAMPPRICE"$ - Bitstamp"
+else
 # Polling these exchange prior, so we do only one pull of all the markets and parse them later on for each coin.
 echo "Asking the exchanges for prices"
 
@@ -118,5 +123,5 @@ BTERGET=`curl -sG --max-time 3 'http://data.bter.com/api/1/ticker/'$COINZ'_BTC'`
         fi   
 	fi
 
-
+fi
 ### END OF THE MAGIC --- coded by eth1
