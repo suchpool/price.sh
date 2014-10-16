@@ -17,6 +17,7 @@ fi
 COINZ=$1
 
 if [ ${COINZ} == "BTC" ]; then
+   echo "Asking Bitstamp for Bitcoin's price"
    BITSTAMPGET=`curl -sG --max-time 15 'https://www.bitstamp.net/api/ticker/'`
    BITSTAMPPRICE=`echo $BITSTAMPGET | jq .last | cut -d '"' -f2`
    echo "["`date +%T`"]" "BTC/USD - Last: "$BITSTAMPPRICE"$ - Bitstamp"
